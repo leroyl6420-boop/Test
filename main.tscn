@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://c2cry17w4iws4"]
+
+[ext_resource type="Script" uid="uid://do1ir2q17ueu3" path="res://player.gd" id="1_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://dam7fprlxht4j" path="res://qr-code (1).png" id="1_lquwl"]
+[ext_resource type="Texture2D" uid="uid://6t6wacmltg3n" path="res://Innovate OC Circular Badge Logo.png" id="2_h2yge"]
+[ext_resource type="Texture2D" uid="uid://28ndahnihby5" path="res://icon.svg" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://crsbe277m8tli" path="res://object.tscn" id="5_7mycd"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ii1hj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rutxo"]
+radius = 32.06244
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g7kda"]
+radius = 29.068884
+
+[node name="Node2D" type="Node2D" unique_id=2092158436]
+
+[node name="BG" type="Sprite2D" parent="." unique_id=1261194510]
+position = Vector2(4598, 2443)
+scale = Vector2(9999, 9999)
+texture = SubResource("PlaceholderTexture2D_ii1hj")
+
+[node name="Basket" type="Area2D" parent="." unique_id=1323145241 groups=["Basket"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="Basket" unique_id=1922212326]
+position = Vector2(361.99997, 65.99999)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_lquwl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Basket" unique_id=1223873135]
+position = Vector2(362, 66)
+shape = SubResource("CircleShape2D_rutxo")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=749999256]
+position = Vector2(319, 275)
+script = ExtResource("1_0xm2m")
+
+[node name="Player_Hitbox" type="Area2D" parent="Player" unique_id=2092972539]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Player_Hitbox" unique_id=597491948]
+shape = SubResource("CircleShape2D_g7kda")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=2106720581]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_h2yge")
+
+[node name="Held_Object" type="Sprite2D" parent="Player" unique_id=448483602]
+visible = false
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_h2yge")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Player" unique_id=1947259600]
+
+[node name="Score_Display" type="Label" parent="Player/CanvasLayer" unique_id=710728111]
+offset_left = 1051.0
+offset_top = 6.0
+offset_right = 1112.0
+offset_bottom = 29.0
+text = "Score: 0"
+
+[node name="Object" parent="." unique_id=141649968 instance=ExtResource("5_7mycd")]
+position = Vector2(42, 35)
+
+[node name="Object2" parent="." unique_id=1531766963 instance=ExtResource("5_7mycd")]
+position = Vector2(-275, -201)
+
+[node name="Object3" parent="." unique_id=1228363799 instance=ExtResource("5_7mycd")]
+position = Vector2(-568, -7)
+
+[node name="Object4" parent="." unique_id=727990909 instance=ExtResource("5_7mycd")]
+position = Vector2(127, -341)
+
+[node name="Object5" parent="." unique_id=341971031 instance=ExtResource("5_7mycd")]
+position = Vector2(-800, -369)
+
+[connection signal="area_entered" from="Player/Player_Hitbox" to="Player" method="_on_player_hitbox_area_entered"]
